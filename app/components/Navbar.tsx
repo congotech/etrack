@@ -25,7 +25,7 @@ const Navbar = () => {
                                 Gest <span className='text-warning'>Finance</span>
                             </div>
                             <div className='md:flex hidden'>
-                                <Link href={""} className='btn rounded-full'>
+                                <Link href={"/budgets"} className='btn rounded-full'>
                                     Mes Budgets
                                 </Link>
                                 <Link href={""} className='btn rounded-full mx-4'>
@@ -39,7 +39,7 @@ const Navbar = () => {
                         </div>
 
                         <div className='md:hidden flex mt-2 justify-center'>
-                                <Link href={""} className='btn btn-sm rounded-full'>
+                                <Link href={"budgets"} className='btn btn-sm rounded-full'>
                                     Mes Budgets
                                 </Link>
                                 <Link href={""} className='btn btn-sm rounded-full mx-4'>
