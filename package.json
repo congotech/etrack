@@ -12,6 +12,7 @@
     "@clerk/nextjs": "^6.14.3",
     "@prisma/client": "^6.6.0",
     "emoji-picker-react": "^4.12.2",
+    "lucide-react": "^0.511.0",
     "next": "15.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

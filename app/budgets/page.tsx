@@ -3,9 +3,12 @@ import React, { useEffect, useState } from 'react'
 import Wrapper from '../components/Wrapper'
 import { useUser } from '@clerk/nextjs';
 import EmojiPicker from 'emoji-picker-react';
-import { error } from 'console';
-import { addBudget } from '../action';
+import { addBudget, getBudgetsByUser } from '../action';
 import Notification from '../components/Notification';
+import { Budget } from '@/type';
+import Link from 'next/link';
+import BudgetItem from '../components/BudgetItem';
+import { Landmark } from 'lucide-react';
 
 const page = () => {
 
@@ -14,6 +17,7 @@ const page = () => {
   const [budgetAmount, setBudgetAmount] = useState<string>("");
   const [showEmojiPicker, steShowEmojiPicker] = useState<boolean>(false);
   const [selectedEmoji, setSelectEmoji] = useState<string>("");
+  const [budgets, setBudgets] = useState<Budget[]>([]);
 
   const [notification, setNotification] = useState<string>("");
 
@@ -38,6 +42,7 @@ const page = () => {
         amount,
         selectedEmoji
       )
+      fetchBudgets();
       const modal = document.getElementById("my_modal_3") as HTMLDialogElement
       if(modal){
         modal.close()
@@ -48,9 +53,24 @@ const page = () => {
       setSelectEmoji("")
       steShowEmojiPicker(false)
     } catch (error) {
-      setNotification(`Erreur lors de la création du budget: ${error}`)
+      setNotification(`${error}`)
     }
   }
+
+  const fetchBudgets = async () => {
+    if(user?.primaryEmailAddress?.emailAddress){
+      try {
+        const userBudgets = await getBudgetsByUser(user?.primaryEmailAddress?.emailAddress)
+        setBudgets(userBudgets);
+      } catch (error) {
+        setNotification(`Erreur lors de la récupération des budgets:", ${error}`)
+      }
+    }
+  }
+
+   useEffect (() => {
+    fetchBudgets()
+  }, [user?.primaryEmailAddress?.emailAddress])
 
   return (
     <Wrapper>
@@ -60,11 +80,12 @@ const page = () => {
     )}
 
       <button
-        className="btn"
+        className="btn mb-4"
         onClick={() => (document.getElementById('my_modal_3') as
           HTMLDialogElement).showModal()}
       >
         Nouveau Budget
+        <Landmark className='w-4'/>
       </button>
 
       <dialog id="my_modal_3" className="modal">
@@ -113,6 +134,15 @@ const page = () => {
           </div>
         </div>
       </dialog>
+
+      <ul className='grid md:grid-cols-3 gap-4'>
+        {budgets.map((budget) => 
+          <Link key={budget.id} href={""}>
+            <BudgetItem budget={budget} enableHover={1}></BudgetItem>
+          </Link>
+        )}
+      </ul>
+
     </Wrapper>);
 
 };
