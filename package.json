@@ -28,7 +28,11 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.0",
     "postcss": "^8.5.3",
+<<<<<<< HEAD
     "prisma": "^6.9.0",
+=======
+    "prisma": "^6.6.0",
+>>>>>>> a4eda5d1dede6b138bee1c37b53187c445dc704a
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
   }

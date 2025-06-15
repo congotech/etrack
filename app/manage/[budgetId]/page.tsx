@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 import {
   addTransactionToBudget,
@@ -168,3 +169,16 @@ const page = ({ params }: { params: Promise<{ budgetId: string }> }) => {
 };
 
 export default page;
+=======
+import React from 'react'
+
+const page = () => {
+  return (
+    <div>
+      Page
+    </div>
+  )
+}
+
+export default page
+>>>>>>> a4eda5d1dede6b138bee1c37b53187c445dc704a
